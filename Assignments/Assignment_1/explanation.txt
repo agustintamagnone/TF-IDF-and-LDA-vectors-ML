@@ -11,3 +11,17 @@ The model creation time difference was probably due to that LDA was set to two p
 
 The comparison time difference can be explained by the dimensionality reduction of using 30 topics with LDA, resulting in a 30-long vector whereas the TF-IDF vector will be the number of (unique) tokens in the corpus, resulting in a large vector which is calculated at each iteration for the documents (in our solution) instead of using the existing TF-IDF vector calculated for each document at the beginning.
 
+Task 3:
+
+Task 4:
+The following are several methods to use tagging:
+ - By taking Tk = {t1, t2, ...} as the set of tags of document k, we can calculate the similarity in tags between two articles k, j as (Tk n Tj) / (Tk U Tj). The similarity would then range between 0 (no overlap in tags), 1 (same tags). This approach would be more coarse-grained than TF-IDF or LDA, which use the article content, but would preserve the semantic intent of the article
+    - This approach can be supplemented by either TF-IDF or LDA, with an adjustable parameter (a). In this case, the final similarity would be sim_lda * a + sim_tags * (1-a). In this way, the advantages of both methods can be gained. a can be adjusted to give higher weight to content-based or tag-based similarity.
+    - Tags can also be stemmed to avoid issues with plurality, etc.
+    - This approach gives equal value to all tags
+
+ - We can also construct a bag-of-words style model with tags, assigning each article a tag vector where 1 = present, 0 = not present. Then we can use cosine similarity.
+    - We can also supplement this approach with the LDA and TF-IDF by using a parameter a as described earlier
+
+ - We can also use TF-IDF with the tags rather than the article contents. This would result in more common tags being weighed as less important, and vice versa. 
+    - This can also be combined with TF-IDF or LDA by using a parameter as described earlier.
