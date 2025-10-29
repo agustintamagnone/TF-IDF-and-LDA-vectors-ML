@@ -1,5 +1,13 @@
 
-TF-IDR (Food & Drink):
+Task 1 TF-IDF (Food & Drink):
+Using TF-IDF as the basis for the content-based recommender system resulted in a ratio quality of 0.62, the execution time of creating the model was 43.8 seconds, and the comparison time took 20.2 seconds. 
 
-LDA (Food & Drink):
-The results
+Task 2 LDA (Food & Drink):
+The results of using LDA were a ratio quality of 0.57, model creation time of 1:15.9, and comparison time of 1.6 seconds.
+
+The notable differences between LDA and TF-IDF are the execution times, as with LDA the creation time was noticeable longer, though the comparison time was just 1.6 seconds compared to TF-IDF's 20.2s. 
+
+The model creation time difference was probably due to that LDA was set to two passes, meaning it had to iterate over the entire corpus' tokens twice, as well as the random topic assignment at the start. Meanwhile TF-IDF runs once over every token.
+
+The comparison time difference can be explained by the dimensionality reduction of using 30 topics with LDA, resulting in a 30-long vector whereas the TF-IDF vector will be the number of (unique) tokens in the corpus, resulting in a large vector which is calculated at each iteration for the documents (in our solution) instead of using the existing TF-IDF vector calculated for each document at the beginning.
+
