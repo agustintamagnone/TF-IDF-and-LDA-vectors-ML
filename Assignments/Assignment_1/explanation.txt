@@ -1,19 +1,48 @@
-
+----------------------------------------------------------------------------------------------------------------------------------
 Task 1 TF-IDF (Food & Drink):
-Using TF-IDF as the basis for the content-based recommender system resulted in a ratio quality of 0.62, the execution time of creating the model was 43.8 seconds, and the comparison time took 20.2 seconds. 
+----------------------------------------------------------------------------------------------------------------------------------
 
+Using TF-IDF as the basis for the content-based recommender system resulted in a ratio quality of 0.62,
+the execution time of creating the model was 43.8 seconds, and the comparison time took 20.2 seconds.
+
+----------------------------------------------------------------------------------------------------------------------------------
 Task 2 LDA (Food & Drink):
+----------------------------------------------------------------------------------------------------------------------------------
+
 The results of using LDA were a ratio quality of 0.57, model creation time of 1:15.9, and comparison time of 1.6 seconds.
 
-The notable differences between LDA and TF-IDF are the execution times, as with LDA the creation time was noticeable longer, though the comparison time was just 1.6 seconds compared to TF-IDF's 20.2s. Additionally, LDA was susceptible to randomness, especially with two passes: random_state parameters 10, 20, 30, 40 were tested, resulting in ratio qualities of 0.54, 0.57, 0.42, and 0.28 respectively
+The notable differences between LDA and TF-IDF are the execution times, as with LDA the creation time was noticeable longer,
+though the comparison time was just 1.6 seconds compared to TF-IDF's 20.2s. Additionally, LDA was susceptible to randomness,
+especially with two passes: random_state parameters 10, 20, 30, 40 were tested, resulting in ratio qualities of 0.54, 0.57,
+0.42, and 0.28 respectively.
 
-The model creation time difference was probably due to that LDA was set to two passes, meaning it had to iterate over the entire corpus' tokens twice, as well as the random topic assignment at the start. Meanwhile TF-IDF runs once over every token.
+The model creation time difference was probably due to that LDA was set to two passes, meaning it had to iterate over the entire corpus' tokens twice,
+as well as the random topic assignment at the start. Meanwhile, TF-IDF runs once over every token.
 
-The comparison time difference can be explained by the dimensionality reduction of using 30 topics with LDA, resulting in a 30-long vector whereas the TF-IDF vector will be the number of (unique) tokens in the corpus, resulting in a large vector which is calculated at each iteration for the documents (in our solution) instead of using the existing TF-IDF vector calculated for each document at the beginning.
+The comparison time difference can be explained by the dimensionality reduction of using 30 topics with LDA, resulting in a 30-long vector whereas the
+TF-IDF vector will be the number of (unique) tokens in the corpus, resulting in a large vector which is calculated at each iteration for the documents
+(in our solution) instead of using the existing TF-IDF vector calculated for each document at the beginning.
 
-Task 3:
 
+----------------------------------------------------------------------------------------------------------------------------------
+Task 3 TF-IDF and LDA related to (Sports) and comparison to Task 1 and Task 2:
+----------------------------------------------------------------------------------------------------------------------------------
+
+For the next task we repeated the previous tasks, but this time for a different subset of the .csv file (Sports), where Using TF-IDF resulted in a ratio quality
+of 0.39. The execution time of creating the model was 30.4 seconds, and the comparison time took 12 seconds.
+
+Then, we implemented the LDA model to the same subset, where we obtained a much lower ratio quality of 0.12, utilizing a random_state parameter of 40.
+For this task, we note there is a much closer gap for the model the time needed to be created compared to task 1 and 2 between LDA and TF-IDF, since the time
+needed to be created was 33 seconds and gets really close in between them, but there is still a gap for the comparison time, with a really fast execution time of 500 ms.
+
+The reason why we believe Sports has worse quality ratio compared to the topic 'Food & Drink', could be due to the topic 'Sports' having many similar words from other topics
+in its document itself, whereas 'Food and Drink' might have more words and items specific to the topic itself such as pepper, beef, potatoes (very distinct words).
+To expand this reasoning, topic from the 'Sports' column might have words such as "team" or "win", which could be used in other topics as well like 'Business' or 'Politics'.
+Sports can also be broad, and with the parameter topics being 30, it may not be easy to fit clearly into them with LDA, whereas the topic 'Food and Drink' can be more specific.
+
+----------------------------------------------------------------------------------------------------------------------------------
 Task 4:
+----------------------------------------------------------------------------------------------------------------------------------
 The following are several methods to use tagging:
  - By taking Tk = {t1, t2, ...} as the set of tags of document k, we can calculate the similarity in tags between two articles k, j as (Tk n Tj) / (Tk U Tj). The similarity would then range between 0 (no overlap in tags), 1 (same tags). This approach would be more coarse-grained than TF-IDF or LDA, which use the article content, but would preserve the semantic intent of the article
     - This approach can be supplemented by either TF-IDF or LDA, with an adjustable parameter (a). In this case, the final similarity would be sim_lda * a + sim_tags * (1-a). In this way, the advantages of both methods can be gained. a can be adjusted to give higher weight to content-based or tag-based similarity.

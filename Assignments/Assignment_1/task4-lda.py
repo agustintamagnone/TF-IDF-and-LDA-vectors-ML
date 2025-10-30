@@ -31,7 +31,7 @@ txts = [
 mapping = corpora.Dictionary(txts)
 model_bow = [mapping.doc2bow(txt) for txt in txts]
 
-lda = models.LdaModel(model_bow, num_topics=30, id2word=mapping, random_state=50, passes=2)
+lda = models.LdaModel(model_bow, num_topics=30, id2word=mapping, random_state=40, passes=2)
 lda_v = []
 for v in model_bow:
     lda_v.append(lda[v])
