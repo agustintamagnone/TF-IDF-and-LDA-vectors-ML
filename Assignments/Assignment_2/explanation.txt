@@ -1,0 +1,14 @@
+----------------------------------------------------------------------------------------------------------------------------------
+Task 2. Mitigation of the sparsity problem with Funk SVD
+----------------------------------------------------------------------------------------------------------------------------------
+
+To compare how each method deals with sparsity, we evaluated user-based KNN and the Funk SVD model from the Surprise library
+using the same train–test splits of the MovieLens 100k dataset. With 25% missing ratings, the best KNN configuration (K = 68)
+reached a MAE of 0.7407, while SVD achieved a slightly lower MAE of 0.7376. In this case the dataset is still relatively dense,
+so both algorithms behave similarly, although SVD still performs a bit better.
+
+When increasing the missing ratings to 75%, the impact of sparsity became much clearer. The best KNN model (K = 72) saw its MAE
+rise to 0.8130, while SVD obtained a noticeably lower MAE of 0.7727. This makes sense based on what we learned in class: KNN depends
+heavily on users having enough co-rated items, so it struggles when the matrix becomes sparse. SVD, instead, learns latent factors
+for users and items using all observed ratings, allowing it to generalize better even when very few ratings are available. As a result,
+SVD handles the sparsity problem much more effectively than user-based KNN.
